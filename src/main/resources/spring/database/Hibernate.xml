@@ -24,6 +24,7 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 		<value>com.gigaware.main.golf.entity.Branch</value>
 		<value>com.gigaware.main.golf.entity.Member</value>
 		<value>com.gigaware.main.golf.entity.Person</value>
+		<value>com.gigaware.main.golf.entity.Hole</value>
 	</list>
     </property>
 

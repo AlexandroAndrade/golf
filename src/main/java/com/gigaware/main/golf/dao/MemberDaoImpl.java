@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2015, Gigaware Solutions.
+ */
 package com.gigaware.main.golf.dao;
 
 import java.io.Serializable;
@@ -9,6 +12,10 @@ import com.gigaware.main.golf.constants.QueryConstants;
 import com.gigaware.main.golf.dao.factory.AbstractHibernateDao;
 import com.gigaware.main.golf.entity.Member;
 
+/**
+ * @author alex andrade
+ * yngwie_alex@hotmail.com
+ */
 @Repository("memberDao")
 public class MemberDaoImpl extends AbstractHibernateDao implements MemberDao, Serializable{
 
@@ -19,6 +26,13 @@ public class MemberDaoImpl extends AbstractHibernateDao implements MemberDao, Se
 		super.getSessionFactory().getCurrentSession().save(m);
 	}
 
+	@Override
+	public void saveAll(List<Member> members) {
+		for(Member m : members){
+			this.save(m);
+		}
+	}
+	
 	@Override
 	public void update(Member m) {
 		super.getSessionFactory().getCurrentSession().update(m);

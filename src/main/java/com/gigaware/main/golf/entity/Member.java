@@ -1,16 +1,20 @@
+/**
+ * Copyright (c) 2015, Gigaware Solutions.
+ */
 package com.gigaware.main.golf.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * @author alex andrade
+ * yngwie_alex@hotmail.com
+ */
 @Entity
 @Table(name = "Socio", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "claveSocio")

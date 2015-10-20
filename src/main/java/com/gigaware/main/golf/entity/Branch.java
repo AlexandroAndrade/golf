@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2015, Gigaware Solutions.
+ */
 package com.gigaware.main.golf.entity;
 
 import java.util.HashSet;
@@ -12,13 +15,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author alex andrade
+ * yngwie_alex@hotmail.com
+ */
 @Entity
 @Table(name = "Sucursal")
 public class Branch {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idSucursal", length = 45, nullable = false)
+	@Column(name = "idSucursal", nullable = false)
 	private Long idBranch;
 	
 	@Column(name = "nombreSucursal", length = 45, nullable = false)

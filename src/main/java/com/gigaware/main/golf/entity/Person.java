@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2015, Gigaware Solutions.
+ */
 package com.gigaware.main.golf.entity;
 
 import javax.persistence.Column;
@@ -10,6 +13,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * @author alex andrade
+ * yngwie_alex@hotmail.com
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Persona", uniqueConstraints = {

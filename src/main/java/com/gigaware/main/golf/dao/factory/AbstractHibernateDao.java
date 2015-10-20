@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2015, Gigaware Solutions.
+ */
 package com.gigaware.main.golf.dao.factory;
 
 import org.hibernate.Query;
@@ -5,6 +8,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author alex andrade
+ * yngwie_alex@hotmail.com
+ */
 @Transactional
 public abstract class AbstractHibernateDao {
 		

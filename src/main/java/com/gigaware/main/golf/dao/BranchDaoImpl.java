@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2015, Gigaware Solutions.
+ */
 package com.gigaware.main.golf.dao;
 
 import java.io.Serializable;
@@ -9,6 +12,10 @@ import com.gigaware.main.golf.constants.QueryConstants;
 import com.gigaware.main.golf.dao.factory.AbstractHibernateDao;
 import com.gigaware.main.golf.entity.Branch;
 
+/**
+ * @author alex andrade
+ * yngwie_alex@hotmail.com
+ */
 @Repository("branchDao")
 public class BranchDaoImpl 
 	extends AbstractHibernateDao
@@ -19,6 +26,13 @@ public class BranchDaoImpl
 	@Override
 	public void save(Branch b) {
 		super.getSessionFactory().getCurrentSession().save(b);
+	}
+	
+	@Override
+	public void saveAll(List<Branch> branches) {
+		for(Branch b : branches){
+			this.save(b);
+		}
 	}
 
 	@Override
@@ -40,5 +54,8 @@ public class BranchDaoImpl
 	public List<Branch> getAll() {
 		return (List<Branch>) super.createQuery(QueryConstants.BRANCH_GET_ALL).list();
 	}
+
+
+
 
 }
