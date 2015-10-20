@@ -13,31 +13,32 @@ import com.gigaware.main.golf.entity.Member;
 public class MemberDaoImpl extends AbstractHibernateDao implements MemberDao, Serializable{
 
 	private static final long serialVersionUID = -6300384378000770861L;
-
-	public void saveMember(Member m) {
-		// TODO Auto-generated method stub
 		
+	@Override
+	public void save(Member m) {
+		super.getSessionFactory().getCurrentSession().save(m);
 	}
 
-	public void updateMember(Member m) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void update(Member m) {
+		super.getSessionFactory().getCurrentSession().update(m);
 	}
 
-	public void deleteMember(Member m) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void delete(Member m) {
+		super.getSessionFactory().getCurrentSession().delete(m);
 	}
-
+	
+	public Member getMemberById(Long idMember) {
+		return (Member) super.createQuery(QueryConstants.MEMBER_GET_BY_ID).setParameter("idMember", idMember).uniqueResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Member> getAll() {
 		return (List<Member>) super.createQuery(QueryConstants.MEMBER_GET_ALL).list();
 	}
 
-	public Member getMemberById(Long idMember) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 }

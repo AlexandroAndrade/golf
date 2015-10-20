@@ -35,7 +35,7 @@ public class PersonDaoImpl
 		return persons;
 	}
 
-	public Person getById(Long idPerson) {
+	public Person getPersonById(Long idPerson) {
 		// TODO Auto-generated method stub
 		return null;
 	}

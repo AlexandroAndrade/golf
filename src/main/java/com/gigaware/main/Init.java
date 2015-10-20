@@ -7,32 +7,39 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.gigaware.main.golf.dao.BranchDao;
 import com.gigaware.main.golf.dao.MemberDao;
-import com.gigaware.main.golf.dao.PersonDao;
 import com.gigaware.main.golf.entity.Branch;
 import com.gigaware.main.golf.entity.Member;
-import com.gigaware.main.golf.entity.Person;
 
 public class Init {
 
 	public static void main(String[] args) {
-
-		ApplicationContext ac = new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-
-		PersonDao personDao = (PersonDao) ac.getBean("personDao");
-		MemberDao memberDao = (MemberDao) ac.getBean("memberDao");
-		BranchDao branchDao = (BranchDao) ac.getBean("branchDao");
 		
+		
+		ApplicationContext ac = new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
+		
+		BranchDao branchDao = (BranchDao) ac.getBean("branchDao");
+		MemberDao memberDao = (MemberDao) ac.getBean("memberDao");
 		
 		List<Member> members = memberDao.getAll();
-		escribe("=== Members ===");
-		escribe(members);
 		escribe(members.size());
+
+		Member m = new Member();
+		m.setNames("James Alan");
+		m.setFirstLastName("Hetfield");
+		m.setSecondLastName("");
+		m.setPhoneNumber("+1-887-5467");
+		m.setEmail("james.hetfiel@metallica.com");
+		m.setAddress("Lincoln Rd. #494, San Francisco, California");
+		m.setHandicap(0);
+		m.setMemberKey("JAHET");
+		m.setBranch(branchDao.getBranchById(1L));
+		memberDao.save(m);
 		
-		Branch b = branchDao.getBranchById(1L);
-		escribe("=== Members ===");
-		escribe(b);
-		escribe(b.getBranchName());
-		
+		members = memberDao.getAll();
+		escribe(members.size());
+
+
+
 		
 	}
 

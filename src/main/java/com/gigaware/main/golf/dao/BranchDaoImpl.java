@@ -16,30 +16,29 @@ public class BranchDaoImpl
 
 	private static final long serialVersionUID = 1133811549995263399L;
 
-	public void saveBranch(Branch b) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void save(Branch b) {
+		super.getSessionFactory().getCurrentSession().save(b);
 	}
 
-	public void updateBranch(Branch b) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void update(Branch b) {
+		super.getSessionFactory().getCurrentSession().update(b);
 	}
 
-	public void deleteBranch(Branch b) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void delete(Branch b) {
+		super.getSessionFactory().getCurrentSession().delete(b);
 	}
-
-	public List<Branch> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public Branch getBranchById(Long idBranch) {
 		return (Branch) super.createQuery(QueryConstants.BRANCH_GET_BY_ID).setParameter("idBranch", idBranch).uniqueResult();
 	}
-	
-	
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Branch> getAll() {
+		return (List<Branch>) super.createQuery(QueryConstants.BRANCH_GET_ALL).list();
+	}
 
 }

@@ -24,13 +24,13 @@ public class Branch {
 	@Column(name = "nombreSucursal", length = 45, nullable = false)
 	private String branchName;
 	
-	@Column(name = "direccion", length = 45, nullable = false)
+	@Column(name = "direccion", length = 255, nullable = false)
 	private String address;
 
-	@Column(name = "telefono", length = 45, nullable = false)
+	@Column(name = "telefono", length = 50, nullable = false)
 	private String phone;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "branch")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
 	private Set<Member> members = new HashSet<Member>();
 	
 	/**
