@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Persona", uniqueConstraints = {
-		@UniqueConstraint(columnNames = {"nombres", "apellidoPaterno", "apellidoPaterno"}),
+		@UniqueConstraint(columnNames = {"nombres", "apellidoPaterno", "apellidoMaterno"}),
 		@UniqueConstraint(columnNames = "email")
 })
 public abstract class Person {
