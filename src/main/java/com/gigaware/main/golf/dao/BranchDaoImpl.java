@@ -55,7 +55,4 @@ public class BranchDaoImpl
 		return (List<Branch>) super.createQuery(QueryConstants.BRANCH_GET_ALL).list();
 	}
 
-
-
-
 }

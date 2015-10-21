@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @author alex andrade
  * yngwie_alex@hotmail.com
@@ -64,7 +67,30 @@ public class Hole {
 	}
 	
 	
+	@Override
+	public boolean equals(Object o){
+		if(o == this){
+			return true;
+		}
+		
+		if(o instanceof Hole){
+			Hole h = (Hole) o;
+			if(h.idHole != null){
+				EqualsBuilder eq = new EqualsBuilder();
+				eq.append(this.idHole.longValue(), h.idHole.longValue());
+				return eq.isEquals();
+			}
+		}
+		return false;
+	}
 	
+	@Override
+	public int hashCode(){
+		HashCodeBuilder hc = new HashCodeBuilder(-5, 5);
+		if(this.idHole != null){
+			hc.append(this.idHole.longValue());
+		}
+		return hc.hashCode();
+	}
 	
-			
 }

@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @author alex andrade
  * yngwie_alex@hotmail.com
@@ -47,8 +50,6 @@ public class Branch {
 		return idBranch;
 	}
 
-	
-	
 	/**
 	 * @return the branchName
 	 */
@@ -56,16 +57,12 @@ public class Branch {
 		return branchName;
 	}
 
-
-
 	/**
 	 * @param branchName the branchName to set
 	 */
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-
-
 
 	/**
 	 * @return the address
@@ -113,6 +110,30 @@ public class Branch {
 		this.members = members;
 	}
 	
+	@Override
+	public boolean equals(Object o){
+		if(o == this){
+			return true;
+		}
+		
+		if(o instanceof Branch){
+			Branch b = (Branch) o;
+			if(b.idBranch != null){
+				EqualsBuilder eq = new EqualsBuilder();
+				eq.append(this.idBranch.longValue(), b.idBranch.longValue());
+				return eq.isEquals();
+			}
+		}
+		return false;
+	}
 	
+	@Override
+	public int hashCode(){
+		HashCodeBuilder hc = new HashCodeBuilder(-13, 7);
+		if(this.idBranch != null){
+			hc.append(this.idBranch);
+		}
+		return hc.hashCode();
+	}
 	
 }

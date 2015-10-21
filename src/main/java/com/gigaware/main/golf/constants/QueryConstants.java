@@ -41,5 +41,18 @@ public final class QueryConstants {
 	/* Get Hole by Id */
 	public static final String HOLE_GET_BY_ID =
 			"FROM Hole H WHERE H.idHole = :idHole";
+	
+	/* Get All Users */
+	public static final String USER_GET_ALL = 
+			"FROM User";
+
+	/* Get By Id */
+	public static final String USER_GET_BY_NICK_NAME = 
+			"FROM User U WHERE U.nickName = :nickName";
+
+	/* Get By Id */
+	public static final String USER_GET_BY_NICK_NAME_AND_PASSWORD= 
+			"FROM User U WHERE U.nickname = :nickName " + 
+			"AND u.password = :password";
 
 }

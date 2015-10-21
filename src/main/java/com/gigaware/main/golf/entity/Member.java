@@ -11,6 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @author alex andrade
  * yngwie_alex@hotmail.com
@@ -69,5 +73,40 @@ public class Member extends Person {
 		this.handicap = handicap;
 	}
 
+	@Override
+	public boolean equals(Object o){
+		if(o == this){
+			return true;
+		}
+		
+		if(o instanceof Member){
+			Member m = (Member) o;
+
+			EqualsBuilder eq = new EqualsBuilder();
+
+			if(m.getIdPerson() != null){
+				eq.append(this.getIdPerson().longValue(), m.getIdPerson().longValue());
+			}
+			if(!StringUtils.isEmpty(this.memberKey)){
+				eq.append(this.memberKey, m.memberKey);
+			}
+			return eq.isEquals();
+
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public int hashCode(){
+		HashCodeBuilder hc = new HashCodeBuilder(-3, 11);
+		if(this.getIdPerson() != null){
+			hc.append(this.getIdPerson().longValue());
+		}
+		if(this.memberKey != null){
+			hc.append(this.memberKey);
+		}
+		return hc.hashCode();
+	}
 	
 }
