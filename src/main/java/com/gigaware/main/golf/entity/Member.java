@@ -3,11 +3,15 @@
  */
 package com.gigaware.main.golf.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -34,8 +38,10 @@ public class Member extends Person {
 	
 	@Column(name = "handicap", nullable = false)
 	private Integer handicap;
-
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+	private Set<GameDetails> gameDetails = new HashSet<GameDetails>();
+	
 	/**
 	 * @return the branch
 	 */
@@ -73,6 +79,20 @@ public class Member extends Person {
 		this.handicap = handicap;
 	}
 
+	
+	/**
+	 * @return the gameDetails
+	 */
+	public Set<GameDetails> getGameDetails() {
+		return gameDetails;
+	}
+	/**
+	 * @param gameDetails the gameDetails to set
+	 */
+	public void setGameDetails(Set<GameDetails> gameDetails) {
+		this.gameDetails = gameDetails;
+	}
+	
 	@Override
 	public boolean equals(Object o){
 		if(o == this){

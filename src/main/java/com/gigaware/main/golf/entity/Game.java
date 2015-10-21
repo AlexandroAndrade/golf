@@ -4,6 +4,8 @@
 package com.gigaware.main.golf.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,10 +36,14 @@ public class Game {
 	private Member member;
 
 	@Column(name = "totalGolpes", nullable = false)
-	private Integer totalHits;
+	private Long totalHits;
 	
 	@Column(name = "fechaJuego", nullable = false)
 	private Date date;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
+	Set<GameDetails> gameDetails = new HashSet<GameDetails>();
+	
 	
 	/**
 	 * @return the member
@@ -54,13 +60,13 @@ public class Game {
 	/**
 	 * @return the totalHits
 	 */
-	public Integer getTotalHits() {
+	public Long getTotalHits() {
 		return totalHits;
 	}
 	/**
 	 * @param totalHits the totalHits to set
 	 */
-	public void setTotalHits(Integer totalHits) {
+	public void setTotalHits(Long totalHits) {
 		this.totalHits = totalHits;
 	}
 	/**
@@ -80,6 +86,18 @@ public class Game {
 	 */
 	public Long getIdGame() {
 		return idGame;
+	}
+	/**
+	 * @return the gameDetails
+	 */
+	public Set<GameDetails> getGameDetails() {
+		return gameDetails;
+	}
+	/**
+	 * @param gameDetails the gameDetails to set
+	 */
+	public void setGameDetails(Set<GameDetails> gameDetails) {
+		this.gameDetails = gameDetails;
 	}
 	
 	

@@ -15,7 +15,7 @@ import com.gigaware.main.golf.entity.Member;
 public interface MemberDao extends GenericDao<Member> {
 	
 	List<Member> getAll();
-	Member getMemberById(Long idMember);
+	Member getById(final Long idPerson);
 	
 	
 }

@@ -3,6 +3,9 @@
  */
 package com.gigaware.main.golf.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -37,7 +41,7 @@ public class Hole {
 	private String holeName;
 	
 	@Column(name = "par", nullable = false)
-	private Integer par;
+	private Long par;
 	
 	@Column(name = "longitudMetros", nullable = false)
 	private Integer holeLength;
@@ -45,6 +49,11 @@ public class Hole {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSucursal", nullable = false)
 	private Branch branch;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hole")
+	private Set<GameDetails> gameDetails = new HashSet<GameDetails>();
+
+	
 	
 	/**
 	 * @return the holeName
@@ -63,13 +72,13 @@ public class Hole {
 	/**
 	 * @return the par
 	 */
-	public Integer getPar() {
+	public Long getPar() {
 		return par;
 	}
 	/**
 	 * @param par the par to set
 	 */
-	public void setPar(Integer par) {
+	public void setPar(Long par) {
 		this.par = par;
 	}
 	/**
@@ -104,6 +113,20 @@ public class Hole {
 	 */
 	public void setBranch(Branch branch) {
 		this.branch = branch;
+	}
+	
+	
+	/**
+	 * @return the gameDetails
+	 */
+	public Set<GameDetails> getGameDetails() {
+		return gameDetails;
+	}
+	/**
+	 * @param gameDetails the gameDetails to set
+	 */
+	public void setGameDetails(Set<GameDetails> gameDetails) {
+		this.gameDetails = gameDetails;
 	}
 	@Override
 	public boolean equals(Object o){

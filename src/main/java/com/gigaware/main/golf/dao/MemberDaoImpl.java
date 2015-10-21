@@ -17,7 +17,9 @@ import com.gigaware.main.golf.entity.Member;
  * yngwie_alex@hotmail.com
  */
 @Repository("memberDao")
-public class MemberDaoImpl extends AbstractHibernateDao implements MemberDao, Serializable{
+public class MemberDaoImpl 
+	extends AbstractHibernateDao 
+	implements MemberDao, Serializable{
 
 	private static final long serialVersionUID = -6300384378000770861L;
 		
@@ -43,8 +45,8 @@ public class MemberDaoImpl extends AbstractHibernateDao implements MemberDao, Se
 		super.getSessionFactory().getCurrentSession().delete(m);
 	}
 	
-	public Member getMemberById(Long idMember) {
-		return (Member) super.createQuery(QueryConstants.MEMBER_GET_BY_ID).setParameter("idMember", idMember).uniqueResult();
+	public Member getById(Long idPerson) {
+		return (Member) super.createQuery(QueryConstants.MEMBER_GET_BY_ID).setParameter("idPerson", idPerson).uniqueResult();
 	}
 	
 	@SuppressWarnings("unchecked")
