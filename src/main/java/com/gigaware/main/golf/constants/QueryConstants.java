@@ -36,12 +36,17 @@ public final class QueryConstants {
 	
 	/* Get All Holes */
 	public static final String HOLE_GET_ALL = 
-			"FROM Hole";
+			"FROM Hole H WHERE H.branch.idBranch = :idBranch";
 	
 	/* Get Hole by Id */
 	public static final String HOLE_GET_BY_ID =
 			"FROM Hole H WHERE H.idHole = :idHole";
-	
+
+	/* Get Hole by Id */
+	public static final String HOLE_GET_TOTAL_HITS_BY_BRANCH =
+			"SELECT SUM(H.par) FROM Hole H "
+		+   "WHERE H.branch.idBranch = :idBranch";
+
 	/* Get All Users */
 	public static final String USER_GET_ALL = 
 			"FROM User";

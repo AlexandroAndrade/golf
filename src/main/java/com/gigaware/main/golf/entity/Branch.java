@@ -43,6 +43,9 @@ public class Branch {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
 	private Set<Member> members = new HashSet<Member>();
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
+	private Set<Hole> holes = new HashSet<Hole>();
+	
 	/**
 	 * @return the idBranch
 	 */
@@ -110,6 +113,22 @@ public class Branch {
 		this.members = members;
 	}
 	
+	
+	
+	/**
+	 * @return the holes
+	 */
+	public Set<Hole> getHoles() {
+		return holes;
+	}
+
+	/**
+	 * @param holes the holes to set
+	 */
+	public void setHoles(Set<Hole> holes) {
+		this.holes = holes;
+	}
+
 	@Override
 	public boolean equals(Object o){
 		if(o == this){

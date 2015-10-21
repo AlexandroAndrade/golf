@@ -3,6 +3,8 @@
  */
 package com.gigaware.main;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,6 +12,8 @@ import com.gigaware.main.golf.dao.BranchDao;
 import com.gigaware.main.golf.dao.HoleDao;
 import com.gigaware.main.golf.dao.MemberDao;
 import com.gigaware.main.golf.dao.UserDao;
+import com.gigaware.main.golf.entity.Branch;
+import com.gigaware.main.golf.entity.Hole;
 import com.gigaware.main.golf.entity.User;
 
 /**
@@ -28,8 +32,10 @@ public class Init {
 		HoleDao   holeDao   = (HoleDao  ) ac.getBean("holeDao");
 		UserDao   userDao   = (UserDao  ) ac.getBean("userDao");
 		
-		User u = userDao.getByNickName("michaelS");
-		escribe(u);
+		List<Hole> h = holeDao.getAll(1L);
+		escribe(h);
+		
+		escribe(holeDao.getTotalHits(1L));
 	}
 	
 	private static void escribe(Object o){

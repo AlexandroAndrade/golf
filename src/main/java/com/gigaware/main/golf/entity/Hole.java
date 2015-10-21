@@ -5,9 +5,12 @@ package com.gigaware.main.golf.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -33,8 +36,16 @@ public class Hole {
 	@Column(name = "Hoyo", length = 45, nullable = false)
 	private String holeName;
 	
+	@Column(name = "par", nullable = false)
+	private Integer par;
+	
 	@Column(name = "longitudMetros", nullable = false)
 	private Integer holeLength;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSucursal", nullable = false)
+	private Branch branch;
+	
 	/**
 	 * @return the holeName
 	 */
@@ -46,6 +57,20 @@ public class Hole {
 	 */
 	public void setHoleName(String holeName) {
 		this.holeName = holeName;
+	}
+	
+	
+	/**
+	 * @return the par
+	 */
+	public Integer getPar() {
+		return par;
+	}
+	/**
+	 * @param par the par to set
+	 */
+	public void setPar(Integer par) {
+		this.par = par;
 	}
 	/**
 	 * @return the holeLength
@@ -67,6 +92,19 @@ public class Hole {
 	}
 	
 	
+	
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
 	@Override
 	public boolean equals(Object o){
 		if(o == this){

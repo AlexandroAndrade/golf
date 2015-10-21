@@ -14,7 +14,8 @@ import com.gigaware.main.golf.entity.Hole;
  */
 public interface HoleDao extends GenericDao<Hole> {
 
-	List<Hole> getAll();
+	List<Hole> getAll(final Long idBranch);
 	Hole getHoleById(final Long idHole);
+	Long getTotalHits(final Long idBranch);
 	
 }

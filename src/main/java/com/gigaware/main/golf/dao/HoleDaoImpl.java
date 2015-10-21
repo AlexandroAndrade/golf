@@ -47,16 +47,25 @@ public class HoleDaoImpl
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Hole> getAll() {
-		return (List<Hole>) super.createQuery(QueryConstants.HOLE_GET_ALL).list();
+	public List<Hole> getAll(final Long idBranch) {
+		return (List<Hole>) super.createQuery(QueryConstants.HOLE_GET_ALL).setParameter("idBranch", idBranch).list();
 	}
 
 	@Override
-	public Hole getHoleById(Long idHole) {
-		return (Hole) super.createQuery(QueryConstants.HOLE_GET_BY_ID).setParameter("idHole", idHole).uniqueResult();
+	public Hole getHoleById(final Long idHole) {
+		return (Hole) 
+				super.createQuery(QueryConstants.HOLE_GET_BY_ID)
+					 .setParameter("idHole", idHole)
+					 .uniqueResult();
 	}
 	
-	
+	@Override
+	public Long getTotalHits(final Long idBranch) {
+		return (Long) 		
+				super.createQuery(QueryConstants.HOLE_GET_TOTAL_HITS_BY_BRANCH)
+					 .setParameter("idBranch", idBranch)
+					 .uniqueResult();
+	}
 	
 
 }
