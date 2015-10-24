@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Golf Club - Members Catalog</title>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menu.xhtml" />
+        <h:form id="mainForm" >
+            #{memberCatalogController.initialize()}
+            <table id="customersTable" style="width: 90%; margin-left: auto; margin-right: auto"> 
+                <tr>
+                    <p:messages id="customerMessage" showDetail="true"  />
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="text-align: center" >
+                        <h:outputLabel  id="lblTitle" value="Catalogo de Socios" style="font-size: 34px; color: #009900" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idNames" value="Names : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idNames" value="#{memberCatalogController.member.names}" 
+                                     maxlength="45"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idFirstLastName" value="Second Name : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idFirstLastName" value="#{memberCatalogController.member.firstLastName}" />
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idSecondLastName" value="Second Last Name : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idSecondLastName" value="#{memberCatalogController.member.firstLastName}" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idAddress" value="Address : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idAddress" value="#{memberCatalogController.member.address}" />
+                    </td>
+                </tr>
+                
+				<tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idPhoneNumber" value="Phone Number : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idPhoneNumber" value="#{memberCatalogController.member.phoneNumber}" />
+                    </td>
+                </tr>
+                
+				<tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idEmail" value="Email : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idEmail" value="#{memberCatalogController.member.email}" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="text-align: right">
+                        <h:outputLabel for="idHandicap" value="Handicap : " />
+                    </td>
+                    <td>
+                        <p:inputText id="idHandicap" value="#{memberCatalogController.member.handicap}" type="number" />
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="text-align: left" >
+                        <p:commandButton id="btnAddMember" value="Add Member" 
+                                         action="#{memberCatalogController.addMember()}" 
+                                         update="mainForm:"/>
+                    </td>
+                    <td>
+                        <p:commandButton id="btnDeleteCustomer" value="Delete Customer"
+                                         onclick="PF('dialogConfirm').show();" />
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <p:separator/>
+                </tr>
+
+                <tr style="width: 100%" border="1"  >
+                    <td colspan="2">
+                        <p:dataTable id="membersDataTable" var="member" value="#{memberCatalogController.membersList}" 
+                                     editable="false" resizableColumns="true" 
+                                     rowKey="#{member.idPerson}" 
+                                     selection="#{memberCatalogController.selectedMember}"
+                                     selectionMode="single" >
+                            <p:ajax event="rowSelect" update=":mainForm:idNames, :mainForm:idFirstLastName, :mainForm:idSecondLastName, :mainForm:idHandicap
+                            		:mainForm:idAddress, :mainForm:idPhoneNumber, :mainForm:idEmail"
+                            		
+                                    listener="#{memberCatalogController.onRowSelect}" />
+
+                            <f:facet name = "header">
+                                Customers
+                            </f:facet>
+
+                            <p:column headerText="Name" style="width: 100px">
+                                <h:outputText value="#{member.names}" />
+                            </p:column>
+
+                            <p:column headerText="First Last Name" sortBy="#{member.firstLastName}"
+                            		  style="width: 115px" >
+                                <h:outputText value="#{member.firstLastName}" />
+                            </p:column>
+
+                            <p:column headerText="Key" style="width: 50px">
+                                <h:outputText value="#{member.memberKey}" />
+                            </p:column>
+
+<!--                             <p:column headerText="Second Last Name" sortBy="#{member.secondLastName}"> -->
+<!--                                 <h:outputText value="#{member.secondLastName}" /> -->
+<!--                             </p:column> -->
+                            
+<!--                             <p:column headerText="Address" sortBy="#{member.address}"> -->
+<!--                                 <h:outputText value="#{member.address}" /> -->
+<!--                             </p:column> -->
+                                
+                            <p:column headerText="Phone Number" style="width: 110px">
+                                <h:outputText value="#{member.phoneNumber}" />
+                            </p:column>
+                            
+                            <p:column headerText="Email" style="width: 180px">
+                                <h:outputText value="#{member.email}" />
+                            </p:column>
+                            
+                                
+                            <p:column style="width: 20px" headerText="Hp" >
+                                <h:outputText value="#{member.handicap}" />
+                            </p:column>
+
+                            <f:facet name = "footer">
+                                Members
+                            </f:facet>
+
+                        </p:dataTable>
+                    </td>
+                </tr>
+            </table>
+            
+            <p:confirmDialog style="position: absolute; left: 300px; top: 0%;" id="dlgConfirm" 
+                             message="Esta Seguro que Desea Eliminar el Registro" 
+                             header="Elminar Registro" widgetVar="dialogConfirm"
+                             width="600" appendTo=":mainForm">
+                            
+                            <p:commandButton id="btnConfirmDelete" value="OK" oncomplete="PF('dialogConfirm').hide()"
+                                             update=":mainForm" actionListener="#{memberCatalogController.deleteMember()}" />
+                            <p:commandButton id="btnCancelDelete" value="No" onclick="PF('dialogConfirm').hide();" type="button" />
+       
+            </p:confirmDialog>
+
+        </h:form>
+    </h:body>
+
+</html>
