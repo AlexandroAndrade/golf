@@ -45,6 +45,7 @@ public class BranchDaoImpl
 		super.getSessionFactory().getCurrentSession().delete(b);
 	}
 	
+        @Override
 	public Branch getBranchById(Long idBranch) {
 		return (Branch) super.createQuery(QueryConstants.BRANCH_GET_BY_ID).setParameter("idBranch", idBranch).uniqueResult();
 	}
