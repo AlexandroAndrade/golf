@@ -22,7 +22,6 @@ public class MemberCatalogController {
 	@Autowired
 	private MemberService memberService;
 	private Member member;
-	private Member selectedMember;
 	private List<Member> membersList;
 	
 	public void initialize(){
@@ -39,7 +38,7 @@ public class MemberCatalogController {
 	}
 	
 	public void onRowSelect(SelectEvent event){
-		this.selectedMember = (Member) event.getObject();
+		this.member = (Member) event.getObject();
 	}
 	
 	public void setMemberService(MemberService memberService) {
@@ -54,14 +53,6 @@ public class MemberCatalogController {
 		this.member = member;
 	}
 	
-	public Member getSelectedMember() {
-		return selectedMember;
-	}
-
-	public void setSelectedMember(Member selectedMember) {
-		this.selectedMember = selectedMember;
-	}
-
 	public List<Member> getMembersList() {
 		return membersList;
 	}

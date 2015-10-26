@@ -110,7 +110,7 @@
                         <p:dataTable id="membersDataTable" var="member" value="#{memberCatalogController.membersList}" 
                                      editable="false" resizableColumns="true" 
                                      rowKey="#{member.idPerson}" 
-                                     selection="#{memberCatalogController.selectedMember}"
+                                     selection="#{memberCatalogController.member}"
                                      selectionMode="single" >
                             <p:ajax event="rowSelect" update=":mainForm:idNames, :mainForm:idFirstLastName, :mainForm:idSecondLastName, :mainForm:idHandicap
                             		:mainForm:idAddress, :mainForm:idPhoneNumber, :mainForm:idEmail"
