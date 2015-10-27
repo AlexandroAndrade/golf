@@ -2,16 +2,23 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+
     <h:head>
+
         <title>Main Menu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!--         <link rel="stylesheet" type="text/css" href="/src/css/styles.css" /> -->
+
     </h:head>
+
+
     <h:body>
+    
         <h:form>
 
-            <p:menubar>
+            <p:menubar styleClass="test">
                 <p:submenu label="Catalogs" icon="ui-icon-document">
-                    <p:menuitem value="Customers" url="customersCatalog.xhtml" />
+                    <p:menuitem value="Customers" url="membersCatalog.xhtml" />
                     <p:menuitem value="Holes" url="holesCatalog.xhtml" />
                     <p:menuitem value="Branches" />
                     <p:separator />

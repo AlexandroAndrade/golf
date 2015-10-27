@@ -29,7 +29,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 })
 public class Member extends Person {
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSucursal", nullable = false)
 	private Branch branch;
 	
