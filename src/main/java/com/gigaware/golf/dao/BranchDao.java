@@ -9,12 +9,11 @@ import com.gigaware.golf.dao.factory.GenericDao;
 import com.gigaware.golf.entity.Branch;
 
 /**
- * @author alex andrade
- * yngwie_alex@hotmail.com
+ * @author alex andrade yngwie_alex@hotmail.com
  */
 public interface BranchDao extends GenericDao<Branch> {
-	
-	List<Branch> getAll();
-	Branch getBranchById(final Long id);
+
+    List<Branch> getAll();
+    Branch getBranchById( final Long id );
 
 }

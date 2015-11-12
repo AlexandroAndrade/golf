@@ -6,14 +6,13 @@ package com.gigaware.golf.dao.factory;
 import java.util.List;
 
 /**
- * @author alex andrade
- * yngwie_alex@hotmail.com
+ * @author alex andrade yngwie_alex@hotmail.com
  */
 public interface GenericDao<T> {
-	
-	void save(T t);
-	void saveAll(List<T> ts);
-	void update(T t);
-	void delete(T t);
-	
+
+    void save( T t );
+    void saveAll( List<T> ts );
+    void update( T t );
+    void delete( T t );
+
 }

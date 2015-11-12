@@ -9,10 +9,6 @@ package com.gigaware.golf.constants;
  */
 public final class QueryConstants {
 	
-	/* Get All Persons */
-	public static final String PERSON_GET_ALL = 
-			"FROM Person";
-	
 	/* Get All Members*/
 	public static final String MEMBER_GET_ALL =
 			"FROM Member";

@@ -9,13 +9,11 @@ import com.gigaware.golf.dao.factory.GenericDao;
 import com.gigaware.golf.entity.Member;
 
 /**
- * @author alex andrade
- * yngwie_alex@hotmail.com
+ * @author alex andrade yngwie_alex@hotmail.com
  */
 public interface MemberDao extends GenericDao<Member> {
-	
-	List<Member> getAll();
-	Member getById(final Long idPerson);
-	
-	
+
+    List<Member> getAll();
+    Member getById( final Long idPerson );
+
 }

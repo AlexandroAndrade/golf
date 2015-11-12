@@ -9,12 +9,12 @@ import com.gigaware.golf.entity.Member;
 import com.gigaware.golf.service.factory.GenericService;
 
 /**
- * @author alex andrade
- * yngwie_alex@hotmail.com
+ * @author alex andrade yngwie_alex@hotmail.com
  */
-public interface MemberService extends GenericService<Member>{
-	
-	List<Member> getAll();
-	Member getById(final Long idPerson);
+public interface MemberService extends GenericService<Member> {
+
+    List<Member> getAll();
+    Member getById( final Long idPerson );
+    Member createEmptyMember();
 
 }
