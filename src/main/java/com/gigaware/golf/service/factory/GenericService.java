@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * @author alex andrade yngwie_alex@hotmail.com
  */
-public interface GenericService<T> {
+public interface GenericService<T, E extends Throwable> {
 
-    void save( T t );
+    void save( T t ) throws E;
     void saveAll( List<T> ts );
     void update( T t );
     void delete( T t );

@@ -10,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.gigaware.golf.entity.Member;
+import com.gigaware.golf.exception.customer.MemberException;
 import com.gigaware.golf.service.MemberService;
+
 import java.io.Serializable;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  * @author alex andrade yngwie_alex@hotmail.com
@@ -47,6 +52,8 @@ public class MemberCatalogController implements Serializable {
     private boolean inputEmailReadOnly;
     private boolean inputHandicapReadOnly;
 
+    //private static final String FOR_HEADER_MESSAGE = "btnSaveMember";
+    
     /**
      * Flag New Member / Existing Member *
      */
@@ -58,16 +65,29 @@ public class MemberCatalogController implements Serializable {
     public MemberCatalogController() {
         this.member = new Member();
     }
+    
+    private void getAllMembers(){
+        this.membersList = memberService.getAll();
+    }
 
     public void initialize() {
 
-        this.membersList = memberService.getAll();
+    	this.getAllMembers();
         this.member = memberService.createEmptyMember();
-
-        this.buttonNewEnabled = true;
+        initializeButtons();
+    }
+    
+    public void initializeWithCurrentMember(){
+    	this.getAllMembers();
+        initializeButtons();
+    }
+    
+    private void initializeButtons(){
+    	this.buttonNewEnabled = true;
         this.buttonModifyEnabled = false;
         this.buttonSaveEnabled = true;
         this.buttonDeleteEnabled = false;
+        this.buttonCancelEnabled = true;
 
         this.inputNamesReadOnly = false;
         this.inputFirstLastNameReadOnly = false;
@@ -79,9 +99,8 @@ public class MemberCatalogController implements Serializable {
         this.inputHandicapReadOnly = false;
 
         this.newMember = true;
-
     }
-
+    
     public void buttonNewMember() {
 
         this.member = memberService.createEmptyMember();
@@ -91,6 +110,7 @@ public class MemberCatalogController implements Serializable {
         this.buttonModifyEnabled = false;
         this.buttonSaveEnabled = true;
         this.buttonDeleteEnabled = false;
+        this.buttonCancelEnabled = true;
 
         this.inputNamesReadOnly = false;
         this.inputFirstLastNameReadOnly = false;
@@ -110,6 +130,7 @@ public class MemberCatalogController implements Serializable {
         this.buttonModifyEnabled = false;
         this.buttonSaveEnabled = true;
         this.buttonDeleteEnabled = true;
+        this.buttonCancelEnabled = true;
 
         this.inputNamesReadOnly = false;
         this.inputFirstLastNameReadOnly = false;
@@ -129,6 +150,7 @@ public class MemberCatalogController implements Serializable {
         this.buttonSaveEnabled = false;
         this.buttonModifyEnabled = true;
         this.buttonDeleteEnabled = true;
+        this.buttonCancelEnabled = false;
 
         this.inputNamesReadOnly = true;
         this.inputFirstLastNameReadOnly = true;
@@ -142,14 +164,33 @@ public class MemberCatalogController implements Serializable {
     }
 
     public void saveMember() {
-        memberService.save( this.member );
-        this.initialize();
+    	try{
+    		memberService.save( this.member );
+    		FacesContext.getCurrentInstance().addMessage(null, 
+    				new FacesMessage(FacesMessage.SEVERITY_INFO, "Member Succesffully Saved.", member.toString()));
+    	}catch( MemberException me ){
+    		FacesContext
+    			.getCurrentInstance()
+    			.addMessage(null, 
+    						new FacesMessage(
+    								FacesMessage.SEVERITY_WARN, 
+    								"Cannot save Member - ", 
+    								me.getMessage()));
+    		this.initializeWithCurrentMember();
+    	}finally{
+    		
+        }
     }
 
     public void deleteMember() {
         memberService.delete( member );
     }
 
+    public void cancel(){
+        this.member = memberService.createEmptyMember();
+        initializeButtons();
+    }
+    
     public void setMemberService( MemberService memberService ) {
         this.memberService = memberService;
     }

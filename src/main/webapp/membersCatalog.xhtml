@@ -18,13 +18,18 @@
             <div id="mainFormDiv" 
                  style=" alligment: center; width: 100%; text-align: center; font-family: monospace; color: cornflowerblue;">
 
-                <p:messages id="memberCatalogMessages" showDetail="true"  />
-
                 <div id="memberFormDiv">
-
+					
                     <div id="titleDiv">
-                        <h:outputLabel  id="lblTitle" value="Catalogo de Socios" style="font-size: 34px;" />
+                        <h:outputLabel  id="lblTitle" value="Catalogo de Socios" style="font-size: 34px;"/>
                     </div>
+
+					<div id="headerMessageDiv" >
+						<p:messages
+							id="headerMessages" 
+							autoUpdate="true" closable="true"
+							showDetail="true" />
+					</div>
 
                     <div id="memberFieldsDiv" style="display: inline-block">
 
@@ -125,7 +130,7 @@
                 <div id="buttonsDiv">
 
                     <p:commandButton id="btnNewMember" value="New Member" 
-                                     action="#{memberCatalogController.buttonNewMember()}"
+                                     actionListener="#{memberCatalogController.buttonNewMember()}"
                                      disabled="#{not memberCatalogController.buttonNewEnabled}"
                                      update="idNames idFirstLastName idSecondLastName 
                                      idMemberKey idAddress idPhoneNumber idEmail idHandicap
@@ -133,7 +138,7 @@
                     </p:commandButton>
 
                     <p:commandButton id="btnModifyMember" value="Modify Member"
-                                     action="#{memberCatalogController.buttonModifyMember()}"
+                                     actionListener="#{memberCatalogController.buttonModifyMember()}"
                                      disabled="#{not memberCatalogController.buttonModifyEnabled}"
                                      update="idNames idFirstLastName idSecondLastName 
                                      idMemberKey idAddress idPhoneNumber idEmail idHandicap
@@ -143,7 +148,7 @@
                     <p:commandButton id="btnSaveMember" value="Save Member" 
                                      actionListener="#{memberCatalogController.saveMember()}"
                                      disabled="#{not memberCatalogController.buttonSaveEnabled}"
-                                     update="idNames idFirstLastName idSecondLastName 
+                                     update=":mainForm idNames idFirstLastName idSecondLastName 
                                      idMemberKey idAddress idPhoneNumber idEmail idHandicap
                                      btnNewMember btnModifyMember btnSaveMember btnDeleteMember btnCancel"
                                      />
@@ -157,8 +162,8 @@
                                      />
 
                     <p:commandButton id="btnCancel" value="Cancel"
-                                     onclick="PF('deleteDialogConfirm').show();"
                                      disabled="#{not memberCatalogController.buttonCancelEnabled}"
+                                     actionListener="#{memberCatalogController.cancel()}"
                                      update="idNames idFirstLastName idSecondLastName 
                                      idMemberKey idAddress idPhoneNumber idEmail idHandicap
                                      btnNewMember btnModifyMember btnSaveMember btnDeleteMember btnCancel"

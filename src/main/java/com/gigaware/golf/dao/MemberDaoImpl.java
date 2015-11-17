@@ -6,6 +6,7 @@ package com.gigaware.golf.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.gigaware.golf.constants.QueryConstants;
@@ -57,4 +58,39 @@ public class MemberDaoImpl
                 super.createQuery( QueryConstants.MEMBER_GET_ALL ).list();
     }
 
+	@Override
+	public Member getByNameFirstLastNameAndSecondLastName(
+			final String names,
+			final String firstLastName, 
+			final String secondLastName) {
+		
+		return ( Member )
+					super
+						.createQuery(QueryConstants.MEMBER_GET_BY_NAMES_FIRSTLASTNAME_SECONDLASTNAME)
+						.setParameter("names", names)
+						.setParameter("firstLastName", firstLastName)
+						.setParameter("secondLastName", secondLastName)
+						.uniqueResult();
+
+	}
+
+	@Override
+	public Member getByMemberKey(String memberKey) {
+
+		return ( Member )
+					super
+						.createQuery(QueryConstants.MEMBER_GET_BY_MEMBER_KEY)
+						.setParameter("memberKey", memberKey)
+						.uniqueResult();
+						
+	}
+    
+    
+
 }
+
+
+
+
+
+

@@ -15,5 +15,7 @@ public interface MemberDao extends GenericDao<Member> {
 
     List<Member> getAll();
     Member getById( final Long idPerson );
+    Member getByNameFirstLastNameAndSecondLastName( final String names, final String firstLastName, final String secondLastName);
+    Member getByMemberKey( final String memberKey );
 
 }

@@ -4,6 +4,7 @@
 package com.gigaware.golf.service;
 
 import com.gigaware.golf.dao.BranchDao;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gigaware.golf.dao.MemberDao;
 import com.gigaware.golf.entity.Member;
+import com.gigaware.golf.exception.customer.MemberException;
+
 import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * @author alex andrade yngwie_alex@hotmail.com
@@ -31,15 +35,61 @@ public class MemberServiceImpl implements MemberService, Serializable {
     BranchDao branchDao;
 
     @Override
-    public void save( Member m ) {
+    public void save( Member m ) throws MemberException {
+    	
+    	if( hasEmptyFields( m ) ){
+    		String message = "Member to Save has Empty Fields";
+    		throw new MemberException( message );
+    	}
+    	
+    	
+    	if(memberDao.getByMemberKey( m.getMemberKey() ) != null ){
+    		String message = "Member already exists with Member Key: " + m.getMemberKey();
+    		throw new MemberException( message );
+    	}
+    	
+    	if(memberDao.getByNameFirstLastNameAndSecondLastName(m.getNames(), m.getFirstLastName(), m.getSecondLastName() ) != null ){
+    		StringBuilder message = new StringBuilder();
+    		message.append( "Member already existe with Names: " )
+    		       .append( m.getNames() + ", ")
+    		       .append("First Last Name: " + m.getFirstLastName()  + ", ")
+    		       .append("and Second Last Name: " + m.getSecondLastName() + ".");
+    		throw new MemberException( message.toString() );
+    	}
+    	
+    	
         memberDao.save( m );
     }
 
+    /**
+     * Validate all Member fields are not Empty
+     */
+    private boolean hasEmptyFields( Member m ){
+    	
+    	if(StringUtils.isEmpty( m.getNames() ) 
+    			|| StringUtils.isEmpty( m.getFirstLastName() )
+    			|| StringUtils.isEmpty( m.getSecondLastName() )
+    			|| StringUtils.isEmpty( m.getAddress() )
+    			|| StringUtils.isEmpty( m.getPhoneNumber() )
+    			|| StringUtils.isEmpty( m.getEmail() )
+    			|| (
+    					m.getBranch() == null
+    					|| m.getBranch().getIdBranch() == null
+    					|| m.getBranch().getIdBranch() <= 0L
+    				)
+    			|| StringUtils.isEmpty( m.getMemberKey() )
+    			|| m.getHandicap() == null
+    				
+    			){
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
     @Override
     public void saveAll( List<Member> members ) {
-        for ( Member m : members ) {
-            this.save( m );
-        }
+    	memberDao.saveAll( members );
     }
 
     @Override

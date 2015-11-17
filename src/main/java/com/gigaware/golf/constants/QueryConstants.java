@@ -17,6 +17,15 @@ public final class QueryConstants {
 	public static final String MEMBER_GET_BY_ID =
 			"FROM Member M WHERE M.idPerson = :idPerson";
 
+	/* Get Member by Names, First Last Name, Second LastName */
+	public static final String MEMBER_GET_BY_NAMES_FIRSTLASTNAME_SECONDLASTNAME = 
+			"FROM Member M WHERE M.names in (:names) "
+			+ "AND M.firstLastName in (:firstLastName) "
+			+ "AND M.secondLastName in (:secondLastName)";
+	
+	/* Get Member by MemberKey */
+	public static final String MEMBER_GET_BY_MEMBER_KEY = 
+			"FROM Member m WHERE m.memberKey in (:memberKey)";
 	
 	/* Get Branch By Id */
 	public static final String BRANCH_GET_BY_ID =
