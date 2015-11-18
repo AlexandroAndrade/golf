@@ -135,5 +135,14 @@ public class Member extends Person implements Serializable {
         }
         return hc.hashCode();
     }
+    
+    @Override
+    public String toString(){
+    	StringBuilder sb = new StringBuilder();
+    	sb.append( "[ " + super.getNames() + ", " )
+    	  .append( super.getFirstLastName() + " " + super.getSecondLastName() )
+    	  .append( ", " + this.memberKey + " ].");
+    	return sb.toString();
+    }
 
 }

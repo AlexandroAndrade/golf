@@ -150,8 +150,8 @@
                                      disabled="#{not memberCatalogController.buttonSaveEnabled}"
                                      update=":mainForm idNames idFirstLastName idSecondLastName 
                                      idMemberKey idAddress idPhoneNumber idEmail idHandicap
-                                     btnNewMember btnModifyMember btnSaveMember btnDeleteMember btnCancel"
-                                     />
+                                     btnNewMember btnModifyMember btnSaveMember btnDeleteMember btnCancel membersDataTable"
+									/>
 
                     <p:commandButton id="btnDeleteMember" value="Delete Customer"
                                      onclick="PF('deleteDialogConfirm').show();"
@@ -235,7 +235,9 @@
                              width="600" appendTo=":mainForm">
 
                 <p:commandButton id="btnConfirmSave" value="Yes" oncomplete="PF('saveDialogConfirm').hide()"
-                                 update=":mainForm"  actionListener="#{memberCatalogController.saveMember()}" />
+                                 update=":mainForm"  listener="#{memberCatalogController.saveMember()}" 
+                                 />
+                                 
                 <p:commandButton id="btnCancelSave"  value="No" onclick="PF('saveDialogConfirm').hide();" type="button" />
 
             </p:confirmDialog>
@@ -247,7 +249,7 @@
                              width="600" appendTo=":mainForm">
 
                 <p:commandButton id="btnConfirmDelete" value="OK" oncomplete="PF('deleteDlgConfirm').hide()"
-                                 update="mainForm membersDataTable" actionListener="#{memberCatalogController.deleteMember()}" />
+                                 update=":mainForm" actionListener="#{memberCatalogController.deleteMember()}" />
                 <p:commandButton id="btnCancelDelete" value="No" onclick="PF('deleteDlgConfirm').hide();" type="button" />
 
             </p:confirmDialog>

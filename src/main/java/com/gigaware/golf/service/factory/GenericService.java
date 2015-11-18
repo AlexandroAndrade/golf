@@ -12,7 +12,7 @@ public interface GenericService<T, E extends Throwable> {
 
     void save( T t ) throws E;
     void saveAll( List<T> ts );
-    void update( T t );
+    void update( T t ) throws E;
     void delete( T t );
 
 }

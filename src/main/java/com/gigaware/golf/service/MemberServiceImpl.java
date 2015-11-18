@@ -36,12 +36,10 @@ public class MemberServiceImpl implements MemberService, Serializable {
 
     @Override
     public void save( Member m ) throws MemberException {
+    		
+    	sanitizeFields( m );
     	
-    	if( hasEmptyFields( m ) ){
-    		String message = "Member to Save has Empty Fields";
-    		throw new MemberException( message );
-    	}
-    	
+    	validateEmptyFields( m );
     	
     	if(memberDao.getByMemberKey( m.getMemberKey() ) != null ){
     		String message = "Member already exists with Member Key: " + m.getMemberKey();
@@ -61,30 +59,16 @@ public class MemberServiceImpl implements MemberService, Serializable {
         memberDao.save( m );
     }
 
-    /**
-     * Validate all Member fields are not Empty
-     */
-    private boolean hasEmptyFields( Member m ){
-    	
-    	if(StringUtils.isEmpty( m.getNames() ) 
-    			|| StringUtils.isEmpty( m.getFirstLastName() )
-    			|| StringUtils.isEmpty( m.getSecondLastName() )
-    			|| StringUtils.isEmpty( m.getAddress() )
-    			|| StringUtils.isEmpty( m.getPhoneNumber() )
-    			|| StringUtils.isEmpty( m.getEmail() )
-    			|| (
-    					m.getBranch() == null
-    					|| m.getBranch().getIdBranch() == null
-    					|| m.getBranch().getIdBranch() <= 0L
-    				)
-    			|| StringUtils.isEmpty( m.getMemberKey() )
-    			|| m.getHandicap() == null
-    				
-    			){
-    		return true;
-    	}
-    	
-    	return false;
+
+    
+    private void sanitizeFields( Member m ){
+    	m.setNames( m.getNames().trim() );
+    	m.setFirstLastName( m.getFirstLastName().trim() );
+    	m.setSecondLastName( m.getSecondLastName().trim() );
+    	m.setAddress( m.getAddress().trim() );
+    	m.setPhoneNumber( m.getPhoneNumber().trim() );
+    	m.setEmail( m.getEmail().trim() );
+    	m.setMemberKey( m.getMemberKey().trim() );
     }
     
     @Override
@@ -93,9 +77,39 @@ public class MemberServiceImpl implements MemberService, Serializable {
     }
 
     @Override
-    public void update( Member m ) {
+    public void update( Member m ) throws MemberException {
+    	
+    	sanitizeFields( m );
+    	validateEmptyFields( m );
         memberDao.update( m );
     }
+    
+	private void validateEmptyFields( Member m ) throws MemberException {
+		if ( hasEmptyFields( m ) ) {
+			String message = "Member to Save has Empty Fields";
+			throw new MemberException( message );
+		}
+	}
+    
+	/**
+	 * Validate all Member fields are not Empty
+	 */
+	private boolean hasEmptyFields( Member m ) {
+
+		if( StringUtils.isEmpty(m.getNames() )
+				|| StringUtils.isEmpty( m.getFirstLastName() )
+				|| StringUtils.isEmpty( m.getSecondLastName() )
+				|| StringUtils.isEmpty( m.getAddress() )
+				|| StringUtils.isEmpty( m.getPhoneNumber() )
+				|| StringUtils.isEmpty( m.getEmail() )
+				|| StringUtils.isEmpty( m.getMemberKey() )
+				|| m.getHandicap() == null ){
+			return true;
+		}
+
+		return false;
+	}    	
+    
 
     @Override
     public void delete( Member m ) {

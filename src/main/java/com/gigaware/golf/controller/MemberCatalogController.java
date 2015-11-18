@@ -58,7 +58,10 @@ public class MemberCatalogController implements Serializable {
      * Flag New Member / Existing Member *
      */
     private boolean newMember;
-
+    
+    private static final String MEMBER_SUCCESSFULY_SAVED = "Member Succesfully Saved.";
+    private static final String CANNOT_SAVE_MEMBER = "Cannot Save Member - ";
+    
     /**
      * Custom Constructor
      */
@@ -80,6 +83,7 @@ public class MemberCatalogController implements Serializable {
     public void initializeWithCurrentMember(){
     	this.getAllMembers();
         initializeButtons();
+        this.newMember = false;
     }
     
     private void initializeButtons(){
@@ -164,26 +168,66 @@ public class MemberCatalogController implements Serializable {
     }
 
     public void saveMember() {
+    	if( this.newMember ){
+    		save( this.member );
+    	}else{
+    		update( this.member );
+    	}
+    }
+    
+    private void save( Member m ){
     	try{
+    		
     		memberService.save( this.member );
-    		FacesContext.getCurrentInstance().addMessage(null, 
-    				new FacesMessage(FacesMessage.SEVERITY_INFO, "Member Succesffully Saved.", member.toString()));
+    		FacesContext
+    			.getCurrentInstance()
+    			.addMessage( null, 
+    						 new FacesMessage(
+    								FacesMessage.SEVERITY_INFO, 
+    								MEMBER_SUCCESSFULY_SAVED, 
+    								member.toString() ) );
+
     	}catch( MemberException me ){
     		FacesContext
     			.getCurrentInstance()
-    			.addMessage(null, 
-    						new FacesMessage(
+    			.addMessage( null, 
+    						 new FacesMessage(
     								FacesMessage.SEVERITY_WARN, 
-    								"Cannot save Member - ", 
-    								me.getMessage()));
-    		this.initializeWithCurrentMember();
+    								CANNOT_SAVE_MEMBER, 
+    								me.getMessage() ) );
     	}finally{
-    		
+    		this.initializeWithCurrentMember();
         }
+    	
     }
+    
+	private void update( Member m ){
+    	try{
+    		
+    		memberService.update( m );
+    		FacesContext
+    			.getCurrentInstance()
+    			.addMessage( null, 
+    						 new FacesMessage(
+    								FacesMessage.SEVERITY_INFO, 
+    								MEMBER_SUCCESSFULY_SAVED, 
+    								member.toString() ) );
 
+    	}catch( MemberException me ){
+    		FacesContext
+    			.getCurrentInstance()
+    			.addMessage( null, 
+    						 new FacesMessage(
+    								FacesMessage.SEVERITY_INFO, 
+    								CANNOT_SAVE_MEMBER, 
+    								me.getMessage() ) );
+    	}finally{
+    		this.initializeWithCurrentMember();
+    	}
+    }
     public void deleteMember() {
         memberService.delete( member );
+        initialize();
     }
 
     public void cancel(){
