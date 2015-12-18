@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
 --
 
 INSERT INTO `persona` (`idPersona`, `nombres`, `apellidoPaterno`, `apellidoMaterno`, `direccion`, `telefono`, `email`) VALUES
-(1, 'Alex', 'Andrade', 'Mtz', 'Pedro Ampudia #764', '436-5749', 'yngwie-alex@hotmail.com'),
+(1, 'Alex', 'Andrade', 'Mtz', 'W irlo Bronson Memorial Highway #764', '455-9988', 'yngwie-alex@hotmail.com'),
 (2, 'Yngwie', 'Malmsteen', 'LannerBack', 'Highway #67', '+1748-9601', 'ymjl@gmail.com'),
 (3, 'James Alan', 'Hetfield', '', 'Lincoln Rd. #494, San Francisco, California', '+1-887-5467', 'james.hetfiel@metallica.com'),
 (5, 'Michael', 'Willy', 'Schenker', 'Flower St. #113, Berlin, Germany', '+1-555-6744', 'michael.schenker@michaelSchenkerHimself.com'),
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`idPersona`, `nickName`, `password`) VALUES
 (5, 'michaelS', 'schenker123'),
-(6, 'rudolphS', 'rudolphSchener');
+(6, 'rudolphS', 'rudolphSchenker');
 
 --
 -- Restricciones para tablas volcadas
