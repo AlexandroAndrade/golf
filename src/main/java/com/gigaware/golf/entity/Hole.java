@@ -43,6 +43,9 @@ public class Hole {
 
     @Column(name = "longitudMetros", nullable = false)
     private Integer holeLength;
+    
+    @Column(name = "orden", nullable = false)
+    private Integer order;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idSucursal", nullable = false)
@@ -92,8 +95,22 @@ public class Hole {
     public void setHoleLength( Integer holeLength ) {
         this.holeLength = holeLength;
     }
-
+    
     /**
+	 * @return the order
+	 */
+	public Integer getOrder() {
+		return order;
+	}
+
+	/**
+	 * @param order the order to set
+	 */
+	public void setOrder(Integer order) {
+		this.order = order;
+	}
+
+	/**
      * @return the idHole
      */
     public Long getIdHole() {

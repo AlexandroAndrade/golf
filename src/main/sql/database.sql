@@ -34,32 +34,34 @@ CREATE TABLE IF NOT EXISTS `hoyo` (
   `idSucursal` int(11) NOT NULL,
   PRIMARY KEY (`idHoyo`),
   UNIQUE KEY `uq_Hoyo` (`Hoyo`),
+  UNIQUE KEY `uq_orden` (`orden`),
   KEY `fk_idSucursal_idx` (`idSucursal`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Volcado de datos para la tabla `hoyo`
 --
+INSERT INTO `hoyo` VALUES 
+(1,'Hoyo 01',5,120,1,1),
+(2,'Hoyo 02',4,90,2,1),
+(3,'Hoyo 03',4,101,3,1),
+(4,'Hoyo 04',4,85,4,1),
+(5,'Hoyo 05',5,105,5,1),
+(6,'Hoyo 06',4,83,6,1),
+(7,'Hoyo 07',3,76,7,1),
+(8,'Hoyo 08',3,53,8,1),
+(9,'Hoyo 09',3,68,9,1),
+(10,'Hoyo 10',4,75,10,1),
+(11,'Hoyo 11',5,110,11,1),
+(12,'Hoyo 12',5,88,12,1),
+(13,'Hoyo 13',5,99,13,1),
+(14,'Hoyo 14',6,116,14,1),
+(15,'Hoyo 15',4,70,15,1),
+(16,'Hoyo 16',4,81,16,1),
+(17,'Hoyo 17',4,73,17,1),
+(18,'Hoyo 18',5,100,18,1);
 
-INSERT INTO `hoyo` (`idHoyo`, `Hoyo`, `par`, `longitudMetros`, `idSucursal`) VALUES
-(1, 'Hoyo 01', 5, 120, 1),
-(2, 'Hoyo 02', 4, 90, 1),
-(3, 'Hoyo 03', 4, 101, 1),
-(4, 'Hoyo 04', 4, 85, 1),
-(5, 'Hoyo 05', 5, 105, 1),
-(6, 'Hoyo 06', 4, 83, 1),
-(7, 'Hoyo 07', 3, 76, 1),
-(8, 'Hoyo 08', 3, 53, 1),
-(9, 'Hoyo 09', 3, 68, 1),
-(10, 'Hoyo 10', 4, 75, 1),
-(11, 'Hoyo 11', 5, 110, 1),
-(12, 'Hoyo 12', 5, 88, 1),
-(13, 'Hoyo 13', 5, 99, 1),
-(14, 'Hoyo 14', 6, 116, 1),
-(15, 'Hoyo 15', 4, 70, 1),
-(16, 'Hoyo 16', 4, 81, 1),
-(17, 'Hoyo 17', 4, 73, 1),
-(18, 'Hoyo 18', 5, 100, 1);
+
 
 -- --------------------------------------------------------
 commit;
