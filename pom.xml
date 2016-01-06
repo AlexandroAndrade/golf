@@ -220,7 +220,8 @@
 
 
 	<build>
-		<finalName>gold</finalName>
+
+                <finalName>golf</finalName>
 
 		<plugins>
 			<plugin>
