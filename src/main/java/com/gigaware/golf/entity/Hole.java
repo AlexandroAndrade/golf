@@ -26,7 +26,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 @Entity
 @Table(name = "Hoyo", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "Hoyo")
+    @UniqueConstraint( columnNames = "Hoyo" ),
+    @UniqueConstraint( columnNames = "Orden" )
 })
 public class Hole {
 
